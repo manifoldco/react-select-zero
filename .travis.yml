@@ -1,0 +1,19 @@
+language: node_js
+services:
+  - docker
+node_js:
+  - 12.4.0
+cache: npm
+stages:
+  - test
+  - publish
+jobs:
+  include:
+    - stage: test
+      name: "\U0001F5DC️ Run tests"
+      script: npm run test:coverage
+after_success:
+  - npx codecov
+branches:
+  only:
+    - master
