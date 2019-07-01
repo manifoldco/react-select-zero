@@ -1,4 +1,4 @@
-body {
+:root {
   --rsz-arrow-width: 2.5em;
   --rsz-border-color-active: var(--rsz-active);
   --rsz-border-color: rgba(0, 0, 0, 0.15);
@@ -315,6 +315,7 @@ body {
     appearance: none;
     background: none;
     border: none;
+    box-sizing: border-box;
     display: flex;
     font-family: inherit;
     font-size: 1em;
@@ -324,6 +325,7 @@ body {
     padding-left: 0;
     padding-right: 0.5em;
     padding-top: 0.375em;
+    width: 100%;
 
     &::before {
       align-items: center;

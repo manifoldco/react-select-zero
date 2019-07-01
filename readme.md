@@ -6,7 +6,7 @@
 
 Lightweight, accessible, zero-dependency combobox alternative to
 [react-select][react-select]. Supports single selection, multiselection,
-search, and full keyboard controls in a handsome `8 KB` component (`2.5 KB`
+search, and full keyboard controls in a handsome `5 KB` component (`1.8 KB`
 gzipped).
 
 ### Comparison
@@ -19,7 +19,7 @@ browser functionality wherever possible rather than JS logic (e.g.:
 
 | Name                                   |   Minified | Minified + gzip |
 | :------------------------------------- | ---------: | --------------: |
-| `@manifoldco/react-select-zero`        | 🔥`8 KB`🔥 |        `2.5 KB` |
+| `@manifoldco/react-select-zero`        | 🔥`5 KB`🔥 |        `1.8 KB` |
 | `@zendeskgarden/react-selection@6.0.1` |  `26.6 KB` |        `6.6 KB` |
 | `downshift`                            |  `21.9 KB` |        `7.1 KB` |
 | `rc-select`                            | `164.3 KB` |       `46.3 KB` |
@@ -34,13 +34,18 @@ npm i @manifoldco/react-select-zero
 ### Basic usage
 
 ```jsx
-<Select
-  name="pokemon"
-  options={['Bulbasaur', 'Charmander', 'Squirtle']}
-  onChange={selected => console.log(selected)} // ['Bulbasaur']
->
-  Select a Pokémon
-</Select>
+const [selection, setSelection] = useState([]);
+
+return (
+  <Select
+    name="pokemon"
+    options={['Bulbasaur', 'Charmander', 'Squirtle']}
+    onChange={setSelection} // ['Bulbasaur']
+    value={selection}
+  >
+    Select a Pokémon
+  </Select>
+);
 ```
 
 _Note: `onChange` always returns an array, even in single selection mode._
@@ -48,17 +53,54 @@ _Note: `onChange` always returns an array, even in single selection mode._
 ### Multi selection
 
 ```jsx
-<Select name="pokemon" options={['Bulbasaur', 'Charmander', 'Squirtle']} multi>
-  Select a Pokémon
-</Select>
+const [selection, setSelection] = useState([]);
+
+return (
+  <Select
+    multi
+    name="pokemon"
+    onChange={setSelection}
+    options={['Bulbasaur', 'Charmander', 'Squirtle']}
+    value={selection}
+  >
+    Select a Pokémon
+  </Select>
+);
+```
+
+### Set initial selection
+
+```jsx
+const [selection, setSelection] = useState(['Bulbasaur']);
+
+return (
+  <Select
+    name="pokemon"
+    onChange={setSelection}
+    options={['Bulbasaur', 'Charmander', 'Squirtle']}
+    value={selection}
+  >
+    Select a Pokémon
+  </Select>
+);
 ```
 
 ### Hide search (shown by default)
 
 ```jsx
-<Select name="pokemon" options={['Bulbasaur', 'Charmander', 'Squirtle']} noSearch>
-  Select a Pokémon
-</Select>
+const [selection, setSelection] = useState([]);
+
+return (
+  <Select
+    noSearch
+    name="pokemon"
+    onChange={setSelection}
+    options={['Bulbasaur', 'Charmander', 'Squirtle']}
+    value={selection}
+  >
+    Select a Pokémon
+  </Select>
+);
 ```
 
 _Note: search won’t appear if there are fewer than 5 items_
@@ -66,34 +108,37 @@ _Note: search won’t appear if there are fewer than 5 items_
 ### Allow creation of new entry (works for single and multi)
 
 ```jsx
-<Select
-  name="pokemon"
-  options={['Bulbasaur', 'Charmander', 'Squirtle']}
-  allowCreate
-  onChange={(selected, created) => {
-    console.log(selected); // []
-    console.log(created); // ['Missingno']
-  }}
->
-  Select a Pokémon
-</Select>
+const [selection, setSelection] = useState([]);
+
+return (
+  <Select
+    name="pokemon"
+    options={['Bulbasaur', 'Charmander', 'Squirtle']}
+    allowCreate
+    onChange={setSelection}
+    value={selection}
+  >
+    Select a Pokémon
+  </Select>
+);
 ```
 
 _Note: user-created options appear in a separate array for convenience._
 
 ### All Props
 
-| Name           | Type       | Default    | Description                                                                                     |
-| :------------- | :--------- | :--------- | :---------------------------------------------------------------------------------------------- |
-| **`name`**     | `string`   |            | **Required** Form name of this input. Query this like a normal form input. Also assits in a11y. |
-| **`options`**  | `string[]` |            | **Required**: Array of strings to display as options                                            |
-| `allowCreate`  | `boolean`  | `false`    | Set `<Select allowCreate />` to allow creating new entries (note: `noSearch` can’t be set)      |
-| `defaultValue` | `string[]` | `[]`       | Set `<Select defaultValue={['Charmander']} />` to set the default selected items.               |
-| `max`          | `number`   | `Infinity` | Set maximum number of items (only works with `multi`)                                           |
-| `multi`        | `boolean`  | `false`    | Set `<Select multi />` to allow multiple selection                                              |
-| `noSearch`     | `boolean`  | `false`    | Set `<Select noSearch />` to hide searching (by default shows with > 5 options)                 |
-| `onChange`     | `Function` |            | Callback to fire when value changes                                                             |
-| `placeholder`  | `string`   |            | Specify placeholder text                                                                        |
+| Name           | Type                 | Default    | Description                                                                                     |
+| :------------- | :------------------- | :--------- | :---------------------------------------------------------------------------------------------- |
+| **`name`**     | `string`             |            | **Required** Form name of this input. Query this like a normal form input. Also assits in a11y. |
+| **`onChange`** | `(string[]) => void` |            | **Required** Form callback called when state changes                                            |
+| **`options`**  | `string[]`           |            | **Required** Array of strings to display as options                                             |
+| **`value`**    | `string[]`           |            | **Required** Set selected values                                                                |
+| `allowCreate`  | `boolean`            | `false`    | Set `<Select allowCreate />` to allow creating new entries (note: `noSearch` can’t be set)      |
+| `max`          | `number`             | `Infinity` | Set maximum number of items (only works with `multi`)                                           |
+| `multi`        | `boolean`            | `false`    | Set `<Select multi />` to allow multiple selection                                              |
+| `noSearch`     | `boolean`            | `false`    | Set `<Select noSearch />` to hide searching (by default shows with > 5 options)                 |
+| `onChange`     | `Function`           |            | Callback to fire when value changes                                                             |
+| `placeholder`  | `string`             |            | Specify placeholder text                                                                        |
 
 ## 💅 Styling
 
