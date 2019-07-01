@@ -58,6 +58,8 @@ single mode._
 </Select>
 ```
 
+_Note: search won’t appear if there are fewer than 5 items_
+
 ### Allow creation of new entry (works for single and multi)
 
 ```jsx
