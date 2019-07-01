@@ -69,7 +69,7 @@ describe('<ReactSelectZero />', () => {
     it('preserves order of options', () => {
       const onChange = jest.fn();
       const { getByText } = render(
-        <ReactSelectZero name="c" multi options={['one', 'two', 'three']} />
+        <ReactSelectZero name="c" multi options={['one', 'two', 'three']} onChange={onChange} />
       );
       fireEvent.click(getByText('three'));
       fireEvent.click(getByText('two'));
@@ -104,7 +104,12 @@ describe('<ReactSelectZero />', () => {
       const onChange = jest.fn();
       const newItem = 'new';
       const { getByText, getByLabelText } = render(
-        <ReactSelectZero name="c" options={['one', 'two', 'three']} />
+        <ReactSelectZero
+          name="c"
+          options={['one', 'two', 'three']}
+          allowCreate
+          onChange={onChange}
+        />
       );
       const search = getByLabelText(SEARCH_LABEL);
       fireEvent.change(search, { target: { value: newItem } });
