@@ -43,8 +43,7 @@ npm i @manifoldco/react-select-zero
 </Select>
 ```
 
-_Note: `onChange` always return an array of strings whether in multi- or
-single mode._
+_Note: `onChange` always returns an array, even in single selection mode._
 
 ### Multi selection
 
