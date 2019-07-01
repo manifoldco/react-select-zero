@@ -1,5 +1,9 @@
 # 🥢 React Select Zero
 
+<p align="center">
+  <img src="./docs/demo.gif" alt="Demo" />
+</p>
+
 Lightweight, accessible, zero-dependency combobox alternative to
 [react-select][react-select]. Supports single selection, multiselection,
 search, and full keyboard controls in a handsome `8 KB` component (`2.5 KB`
