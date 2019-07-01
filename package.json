@@ -1,6 +1,6 @@
 {
   "name": "@manifoldco/react-select-zero",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Zero-dependency, a11y multiselect React component",
   "author": "manifoldco",
   "repository": "https://github.com/manifoldco/react-select-zero",
@@ -25,8 +25,10 @@
     "lint": "npm run lint:ts && npm run lint:css",
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:ts": "eslint --ext .js,.ts,.tsx src",
+    "publish": "pack publish",
     "test": "npm run lint && jest",
-    "test:coverage": "npm run lint && jest --coverage"
+    "test:coverage": "npm run lint && jest --coverage",
+    "version": "npm run build"
   },
   "@pika/pack": {
     "pipeline": [
