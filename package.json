@@ -15,7 +15,7 @@
     "es modules"
   ],
   "scripts": {
-    "build": "pack build && npm run terser",
+    "build": "npm run build:css && pack build && npm run terser",
     "build:css": "postcss src/styles.css -o assets/react-select-zero.css",
     "build:css:watch": "postcss src/styles.css -o assets/react-select-zero.css -w",
     "terser": "npm run terser:node && npm run terser:web",
