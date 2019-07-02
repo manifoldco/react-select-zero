@@ -22,6 +22,7 @@ enum KEY {
   ENTER = 'Enter',
   ESC = 'Escape',
   HOME = 'Home',
+  TAB = 'Tab',
   UP = 'ArrowUp',
 }
 
@@ -135,10 +136,15 @@ const SelectZero: React.FunctionComponent<SelectProps> = ({
         scrollTo(listRef.current, `#${optionId(next)}`);
         break;
       }
-      // close
+      // close on Escape
       case KEY.ESC:
         setIsOpen(false);
         break;
+      // close if tabbing away
+      case KEY.TAB:
+        setIsOpen(false);
+        break;
+      // prevent typing if search hidden
       default:
         if (noSearch) {
           evt.preventDefault();

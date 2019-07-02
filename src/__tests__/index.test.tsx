@@ -135,6 +135,22 @@ describe('<ReactSelectZero />', () => {
         'true',
       ]);
     });
+
+    it('closes when tabbing away', () => {
+      const { getByLabelText, getByText, getByRole } = render(
+        <ReactSelectZero
+          name="marvel-heroes"
+          onChange={jest.fn()}
+          options={['Captain America', 'The Hulk', 'Widowmaker', 'Hawkeye']}
+        />
+      );
+      const trigger = getByText(TRIGGER_LABEL);
+      fireEvent.click(trigger);
+      expect(getByRole('listbox').getAttribute('aria-expanded')).toBe('true');
+      const search = getByLabelText(SEARCH_LABEL) as HTMLInputElement;
+      fireEvent.keyDown(search, { key: 'Tab' });
+      expect(getByRole('listbox').getAttribute('aria-expanded')).toBe('false');
+    });
   });
 
   describe('single', () => {
