@@ -183,6 +183,7 @@
 
   /* Component: Dropdown List */
   & .rsz__option-list {
+    background: white;
     border-bottom: 1px solid var(--rsz-border-color);
     border-left: 1px solid var(--rsz-border-color);
     border-bottom-left-radius: var(--rsz-border-radius);
