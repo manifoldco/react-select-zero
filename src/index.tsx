@@ -151,8 +151,6 @@ const SelectZero: React.FunctionComponent<SelectProps> = ({
   useEffect(() => {
     if (searchRef.current && isOpen) {
       searchRef.current.focus();
-    } else if (triggerRef.current && !isOpen) {
-      triggerRef.current.focus();
     }
   });
 
