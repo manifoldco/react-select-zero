@@ -1,0 +1,96 @@
+{
+  "name": "@manifoldco/react-select-zero",
+  "version": "0.0.1-5",
+  "description": "Zero-dependency, a11y multiselect React component",
+  "author": "manifoldco",
+  "repository": "https://github.com/manifoldco/react-select-zero",
+  "license": "ISC",
+  "keywords": [
+    "react",
+    "select",
+    "combobox",
+    "listbox",
+    "react-select",
+    "esm",
+    "es modules"
+  ],
+  "scripts": {
+    "build": "npm run build:css && pack build && npm run terser",
+    "build:css": "postcss src/styles.css -o assets/react-select-zero.css",
+    "build:css:watch": "postcss src/styles.css -o assets/react-select-zero.css -w",
+    "terser": "npm run terser:node && npm run terser:web",
+    "terser:node": "terser -c -m -o ./pkg/dist-node/index.min.js -- ./pkg/dist-node/index.js",
+    "terser:web": "terser -c -m -o ./pkg/dist-web/index.min.js -- ./pkg/dist-web/index.js",
+    "dev": "concurrently 'npm run build:css:watch' 'node_modules/.bin/start-storybook -p 6006'",
+    "lint": "npm run lint:ts && npm run lint:css",
+    "lint:css": "stylelint 'src/**/*.css'",
+    "lint:ts": "eslint --ext .js,.ts,.tsx src",
+    "publish": "pack publish",
+    "test": "npm run lint && jest",
+    "test:coverage": "npm run lint && jest --coverage",
+    "version": "npm run build"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-ts-standard-pkg"
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ],
+      [
+        "@pika/plugin-copy-assets"
+      ]
+    ]
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@pika/pack": "^0.4.0",
+    "@pika/plugin-build-node": "^0.4.0",
+    "@pika/plugin-build-web": "^0.4.0",
+    "@pika/plugin-copy-assets": "^0.4.0",
+    "@pika/plugin-ts-standard-pkg": "^0.4.0",
+    "@storybook/react": "^5.1.9",
+    "@testing-library/react": "^8.0.4",
+    "@types/jest": "^24.0.15",
+    "@types/react-dom": "^16.8.4",
+    "@types/storybook__react": "^4.0.2",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.6",
+    "concurrently": "^4.1.1",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
+    "jest": "^24.8.0",
+    "jest-dom": "^3.5.0",
+    "pokemon": "^2.0.0",
+    "postcss": "^7.0.17",
+    "postcss-cli": "^6.1.2",
+    "postcss-preset-env": "^6.6.0",
+    "prettier": "^1.18.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "stylelint": "^10.1.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^3.0.0",
+    "terser": "^4.0.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  },
+  "peerDependencies": {
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  }
+}
