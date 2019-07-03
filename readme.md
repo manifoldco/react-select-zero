@@ -115,7 +115,7 @@ return (
     name="pokemon"
     options={['Bulbasaur', 'Charmander', 'Squirtle']}
     allowCreate
-    onChange={setSelection}
+    onChange={setSelection} // ['Bulbasaur', 'Charmander', 'Squirtle', 'Missingno']
     value={selection}
   >
     Select a Pokémon
@@ -123,7 +123,20 @@ return (
 );
 ```
 
-_Note: user-created options appear in a separate array for convenience._
+User-created values will appear in the same array. To determine new from
+existing, you’ll have to scan the `options` you passed for any differences,
+e.g.:
+
+```js
+onChange={
+  (newVal) => {
+    const created = newVal.filter(val => !options.includes(val));
+    const existing = newVal.filter(val => options.includes(val));
+    setCreated(created);
+    setExisting(existing);
+  }
+}
+```
 
 ### All Props
 
@@ -137,7 +150,6 @@ _Note: user-created options appear in a separate array for convenience._
 | `max`          | `number`             | `Infinity` | Set maximum number of items (only works with `multi`)                                           |
 | `multi`        | `boolean`            | `false`    | Set `<Select multi />` to allow multiple selection                                              |
 | `noSearch`     | `boolean`            | `false`    | Set `<Select noSearch />` to hide searching (by default shows with > 5 options)                 |
-| `onChange`     | `Function`           |            | Callback to fire when value changes                                                             |
 | `placeholder`  | `string`             |            | Specify placeholder text                                                                        |
 
 ## 💅 Styling
