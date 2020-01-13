@@ -76,7 +76,7 @@
     "jest-dom": "^3.5.0",
     "pokemon": "^2.0.0",
     "postcss": "^7.0.17",
-    "postcss-cli": "^6.1.2",
+    "postcss-cli": "^7.1.0",
     "postcss-preset-env": "^6.6.0",
     "prettier": "^1.18.2",
     "react": "^16.8.6",
